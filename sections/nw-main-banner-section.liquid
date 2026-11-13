@@ -1,0 +1,237 @@
+{{ 'nw-main-banner.css' | asset_url | stylesheet_tag }}
+
+
+
+{%  style  %} 
+
+  .main_hero_section {
+    background-color: {{section.settings.section_bg_color}};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 0;
+  }
+
+{% if section.settings.height == 'fill' %}
+  .main_hero_section {
+    min-height: calc(100vh - 125px);
+  }
+{% else %}
+  .main_hero_section {
+    min-height: {{section.settings.height_desktop}}px;
+  }
+  @media (max-width: 480px) {
+    .main_hero_section {
+      min-height: {{section.settings.height_mobile}}px;
+    }
+  }
+{% endif %}
+
+.hero-title {
+    font-size: {{section.settings.title_size}}px;
+}
+
+  @media (max-width: 480px) {
+    .hero-title {
+    font-size: {{section.settings.title_size_mobile}}px;
+}
+  }
+
+{% endstyle %}
+
+{%- liquid
+  if settings.animations_reveal_on_scroll
+    assign anim_slide = 'scroll-trigger animate--slide-in'
+    assign anim_fade  = 'scroll-trigger animate--fade-in'
+  else
+    assign anim_slide = ''
+    assign anim_fade  = ''
+  endif
+-%}
+
+<div class="main_hero_section {{ anim_fade }}">
+  <div class="page-width hero-flex">
+
+    <div class="hero-left">
+      <div class="hero-text">
+        <p class="star-icon {{ anim_slide }}">
+          <img src="https://cdn.shopify.com/s/files/1/0842/3030/7949/files/five-star-icon.svg?v=1793774080" />
+          <span>6,500+ five star reviews</span>
+        </p>
+
+        {% if section.settings.use_h1 == true %}
+          <h1 class="hero-title {{ anim_slide }}">{{ section.settings.title }}</h1>
+        {% else %}
+          <h2 class="hero-title {{ anim_slide }}">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        <div class="rte-custom hero-desc {{ anim_slide }}">
+          {{ section.settings.text }}
+        </div>
+      </div>
+
+      <div>
+        {% if section.settings.button_url != blank %}
+          <a href="{{ section.settings.button_url }}" class="primary-btn {{ anim_slide }}">{{ section.settings.button_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-img-grid" {% if settings.animations_reveal_on_scroll %}data-cascade{% endif %}>
+
+        {% if section.settings.image_1 != blank %}
+          {{ section.settings.image_1 | image_url: width: 400 | image_tag: alt: 'Hero image 1', class: anim_slide }}
+        {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0787/6486/7659/files/images.png?v=1794572448" alt="Hero image 1" class="{{ anim_slide }}" />
+        {% endif %}
+
+        {% if section.settings.image_2 != blank %}
+          {{ section.settings.image_2 | image_url: width: 400 | image_tag: alt: 'Hero image 2', class: anim_slide }}
+        {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0787/6486/7659/files/images.png?v=1794572448" alt="Hero image 2" class="{{ anim_slide }}" />
+        {% endif %}
+
+        {% if section.settings.image_3 != blank %}
+          {{ section.settings.image_3 | image_url: width: 400 | image_tag: alt: 'Hero image 3', class: anim_slide }}
+        {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0787/6486/7659/files/images.png?v=1794572448" alt="Hero image 3" class="{{ anim_slide }}" />
+        {% endif %}
+
+        {% if section.settings.image_4 != blank %}
+          {{ section.settings.image_4 | image_url: width: 400 | image_tag: alt: 'Hero image 4', class: anim_slide }}
+        {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0787/6486/7659/files/images.png?v=1794572448" alt="Hero image 4" class="{{ anim_slide }}" />
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "NW Split Content Banner",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "height",
+        "label": "Banner height",
+        "options": [
+          {
+            "value": "fill",
+            "label": "Full screen"
+          }, {
+            "value": "fixed",
+            "label": "Fixed height"
+          }
+        ],
+        "default": "fixed"
+      },
+      {
+        "visible_if": "{{ section.settings.height == 'fixed' }}",
+        "type": "range",
+        "id": "height_desktop",
+        "min": 650,
+        "max": 1000,
+        "step": 10,
+        "unit": "px",
+        "label": "Desktop height",
+        "default": 650
+      },
+      {
+        "visible_if": "{{ section.settings.height == 'fixed' }}",
+        "type": "range",
+        "id": "height_mobile",
+        "min": 550,
+        "max": 1000,
+        "step": 10,
+        "unit": "px",
+        "label": "Mobile height",
+        "default": 550
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "header",
+        "content": "Banner content"
+      }, {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Heading"
+      }, {
+        "type": "range",
+        "id": "title_size",
+        "min": 34,
+        "max": 66,
+        "step": 4,
+        "unit": "px",
+        "label": "Desktop heading size",
+        "default": 66
+      }, {
+        "type": "range",
+        "id": "title_size_mobile",
+        "min": 20,
+        "max": 32,
+        "step": 4,
+        "unit": "px",
+        "label": "Mobile heading size",
+        "default": 24
+      }, {
+        "type": "checkbox",
+        "id": "use_h1",
+        "label": "Set as primary page heading (H1)",
+        "info": "Applies an <h1> tag for SEO. Recommended only if this is the top banner on the page.",
+        "default": false
+      }, {
+        "type": "richtext",
+        "id": "text",
+        "label": "Description",
+        "default": "<p>subtext.....</p>"
+      }, {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "SHOP PAINTINGS"
+      }, {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button link"
+      }, {
+        "type": "header",
+        "content": "Images"
+      }, {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Image 1"
+      }, {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2"
+      }, {
+        "type": "image_picker",
+        "id": "image_3",
+        "label": "Image 3"
+      }, {
+        "type": "image_picker",
+        "id": "image_4",
+        "label": "Image 4"
+      }
+    ],
+    "blocks": [],
+    "limit": 1,
+    "class": "main-banner",
+    "tag": "section",
+    "presets": [
+      {
+        "name": "NW Split Content Banner"
+      }
+    ]
+  }
+{% endschema %} 
