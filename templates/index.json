@@ -24,10 +24,10 @@
         "text": "<p>Fun art instructions + easy to use supplies delivered to your doorstep.</p>",
         "button_label": "SHOP PAINTINGS",
         "button_url": "shopify://collections/hydrogen",
-        "image_1": "shopify://shop_images/hero-1-img_1.jxl",
-        "image_2": "shopify://shop_images/hero-2-img.png",
-        "image_3": "shopify://shop_images/hero-3-img.png",
-        "image_4": "shopify://shop_images/hero-4-img.png"
+        "image_1": "shopify://shop_images/hero-1-img.jxl",
+        "image_2": "shopify://shop_images/hero-2-img.webp",
+        "image_3": "shopify://shop_images/hero-3-img.webp",
+        "image_4": "shopify://shop_images/hero-4-img.webp"
       }
     },
     "nw_logo_carousel_9h377N": {
@@ -36,37 +36,37 @@
         "nw_logo_box_LMW698": {
           "type": "nw_logo_box",
           "settings": {
-            "logo_img": "shopify://shop_images/slide-logo-1.png"
+            "logo_img": "shopify://shop_images/slide-logo-1.jxl"
           }
         },
         "nw_logo_box_wfNxxP": {
           "type": "nw_logo_box",
           "settings": {
-            "logo_img": "shopify://shop_images/slide-logo-2.png"
+            "logo_img": "shopify://shop_images/slide-logo-2.jxl"
           }
         },
         "nw_logo_box_UizTUz": {
           "type": "nw_logo_box",
           "settings": {
-            "logo_img": "shopify://shop_images/slide-logo-3.png"
+            "logo_img": "shopify://shop_images/slide-logo-3.avif"
           }
         },
         "nw_logo_box_6wnnjg": {
           "type": "nw_logo_box",
           "settings": {
-            "logo_img": "shopify://shop_images/slide-logo-4.png"
+            "logo_img": "shopify://shop_images/slide-logo-4.avif"
           }
         },
         "nw_logo_box_JbcDaa": {
           "type": "nw_logo_box",
           "settings": {
-            "logo_img": "shopify://shop_images/slide-logo-5.png"
+            "logo_img": "shopify://shop_images/slide-logo-5.avif"
           }
         },
         "nw_logo_box_qChCpk": {
           "type": "nw_logo_box",
           "settings": {
-            "logo_img": "shopify://shop_images/slide-logo-6.png"
+            "logo_img": "shopify://shop_images/slide-logo-6.avif"
           }
         }
       },
