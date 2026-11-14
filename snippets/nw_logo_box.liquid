@@ -1,0 +1,25 @@
+{%- liquid
+  assign is_clone = is_clone | default: false
+  assign image_loading = loading | default: 'lazy'
+  assign logo_image = block.settings.logo_img
+  assign logo_alt = logo_image.alt | default: 'Logo' | escape
+-%}
+
+<div
+  class="swiper-slide{% if is_clone %} swiper-slide--mobile-clone{% endif %}"
+  {% unless is_clone %}{{ block.shopify_attributes }}{% else %}aria-hidden="true"{% endunless %}
+>
+  {%- if logo_image != blank -%}
+    {{
+      logo_image
+      | image_url: width: 400
+      | image_tag: loading: image_loading, alt: logo_alt
+    }}
+  {%- else -%}
+    <img
+      src="https://cdn.shopify.com/s/files/1/0787/6486/7659/files/logo-placeholder.jpg?v=1794641084"
+      alt="Logo placeholder"
+      loading="{{ image_loading }}"
+    >
+  {%- endif -%}
+</div>

@@ -1,6 +1,7 @@
 :root{
     --body-font: var(--font-sofia-pro);
     --heading-font: var(--font-caprasimo);
+    --heading-font-z: var(--font-zawya-pro);
 
     /* ===========
     Global colors 

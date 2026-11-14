@@ -1,0 +1,168 @@
+.nw-logo-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.nw-logo-carousel-wrapper .page-width {
+  position: relative;
+  z-index: 1;
+}
+
+/* Background image media layer */
+.nw-logo-bg-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nw-logo-bg-media picture,
+.nw-logo-bg-media img.nw-logo-bg-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Main Section Layout */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  width: 100%;
+}
+
+.logo-text {
+  flex: 0 0 auto;
+}
+
+.logo-text h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--nw-section-heading-color, var(--text-color, #0C187E));
+  white-space: nowrap;
+  font-family: var(--heading-font-z);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Slider Area */
+.logo-slider-wrapper {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.logo-slider {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Continuous marquee animation timing */
+.logo-slider .swiper-wrapper {
+  align-items: center;
+  transition-timing-function: linear !important;
+}
+
+.logo-slider .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.logo-item-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.logo-item-link:hover {
+  transform: scale(1.06);
+  opacity: 0.85;
+}
+
+.logo-slider .swiper-slide img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo-slider .swiper-slide:hover img {
+  transform: scale(1.06);
+}
+
+.logo-slider .swiper-slide svg.placeholder-svg {
+  height: 40px;
+  width: 80px;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  opacity: 0.5;
+}
+
+/* Desktop: Display logos evenly spaced in a row without swiper sliding */
+@media (min-width: 1024px) {
+  .logo-slider .swiper-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: none !important;
+    transition: none !important;
+    width: 100% !important;
+  }
+
+  .logo-slider .swiper-slide {
+    width: auto !important;
+    flex: 0 1 auto;
+    margin: 0 !important;
+  }
+
+  /* Hide duplicate slides on desktop */
+  .logo-slider .swiper-slide--mobile-clone,
+  .logo-slider .swiper-slide.swiper-slide-duplicate {
+    display: none !important;
+  }
+}
+
+/* Tablet & Mobile: Enable Swiper continuous marquee */
+@media (max-width: 1023px) {
+  .logo-section {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .logo-text {
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo-slider-wrapper {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .logo-slider {
+    width: 100%;
+  }
+
+  .logo-slider .swiper-slide {
+    flex-shrink: 0;
+  }
+}

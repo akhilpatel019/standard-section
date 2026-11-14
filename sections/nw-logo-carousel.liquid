@@ -1,0 +1,383 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+{{ 'nw-logo.css' | asset_url | stylesheet_tag }}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+{%- liquid
+  assign loading = 'lazy'
+  if section.index == 1
+    assign loading = 'eager'
+  endif
+
+  assign section_background = 'transparent'
+  assign show_media = false
+
+  case section.settings.background_type
+    when 'image'
+      assign section_background = section.settings.background_color
+      assign show_media = true
+    when 'solid'
+      assign section_background = section.settings.background_color
+    when 'linear_gradient'
+      assign section_background = section.settings.background_gradient
+    when 'none'
+      assign section_background = 'transparent'
+  endcase
+
+  if settings.animations_reveal_on_scroll
+    assign anim_slide = 'scroll-trigger animate--slide-in'
+    assign anim_fade  = 'scroll-trigger animate--fade-in'
+  else
+    assign anim_slide = ''
+    assign anim_fade  = ''
+  endif
+-%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .nw-logo-carousel-wrapper {
+    background: {{ section_background }};
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+  }
+
+  #shopify-section-{{ section.id }} .logo-text h4 {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .nw-logo-carousel-wrapper {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .logo-text h4 {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="nw-logo-carousel-wrapper {{ anim_fade }}">
+  {%- if show_media -%}
+    {%- liquid
+      assign bg_image = section.settings.image
+      assign bg_image_mobile = section.settings.mobile_image | default: bg_image
+    -%}
+    {%- if bg_image != blank -%}
+      <div class="nw-logo-bg-media">
+        <picture>
+          {%- if bg_image_mobile != blank and bg_image_mobile != bg_image -%}
+            <source media="(max-width: 749px)" srcset="{{ bg_image_mobile | image_url: width: 1200 }}">
+          {%- endif -%}
+          {{
+            bg_image
+            | image_url: width: 2500
+            | image_tag: class: 'nw-logo-bg-img', loading: loading, alt: bg_image.alt
+            | default: ''
+            | escape
+          }}
+        </picture>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="page-width">
+    <div class="logo-section">
+      {%- if section.settings.section_heading != blank -%}
+        <div class="logo-text {{ anim_slide }}">
+          <h4>{{ section.settings.section_heading }}</h4>
+        </div>
+      {%- endif -%}
+
+      <div class="logo-slider-wrapper {{ anim_slide }}">
+        <div class="logo-slider swiper">
+          <div class="swiper-wrapper">
+            {%- for block in section.blocks -%}
+              {% render 'nw_logo_box', block: block, loading: loading, is_clone: false %}
+            {%- endfor -%}
+
+            {% comment %} Render duplicate slides for seamless mobile loop when blocks count is small {% endcomment %}
+            {%- if section.blocks.size > 0 and section.blocks.size < 6 -%}
+              {%- for block in section.blocks -%}
+                {% render 'nw_logo_box', block: block, loading: 'lazy', is_clone: true %}
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script>
+  (function () {
+    let logoSwiper = null;
+    let resizeTimeout = null;
+
+    function initLogoSwiper() {
+      if (typeof Swiper === 'undefined') return;
+
+      const isTabletOrMobile = window.innerWidth < 1024;
+      const sliderElement = document.querySelector('#shopify-section-{{ section.id }} .logo-slider');
+
+      if (!sliderElement) return;
+
+      if (isTabletOrMobile) {
+        if (!logoSwiper) {
+          logoSwiper = new Swiper(sliderElement, {
+            slidesPerView: 2,
+            spaceBetween: 20,
+            loop: true,
+            speed: 4500,
+            autoplay: {
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: false,
+            },
+            allowTouchMove: true,
+            watchOverflow: true,
+            breakpoints: {
+              480: {
+                slidesPerView: 3,
+                spaceBetween: 25,
+              },
+              768: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+              },
+            },
+          });
+        } else if (logoSwiper.autoplay && !logoSwiper.autoplay.running) {
+          logoSwiper.autoplay.start();
+        }
+      } else {
+        if (logoSwiper) {
+          logoSwiper.destroy(true, true);
+          logoSwiper = null;
+        }
+      }
+    }
+
+    function setupSwiper() {
+      if (typeof Swiper !== 'undefined') {
+        initLogoSwiper();
+      } else {
+        let script = document.querySelector('script[src*="swiper-bundle"]');
+        if (script) {
+          script.addEventListener('load', initLogoSwiper);
+        } else {
+          script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+          script.onload = initLogoSwiper;
+          document.head.appendChild(script);
+        }
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupSwiper);
+    } else {
+      setupSwiper();
+    }
+
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function () {
+        initLogoSwiper();
+      }, 200);
+    });
+
+    document.addEventListener('shopify:section:load', function (event) {
+      if (event.target.id === 'shopify-section-{{ section.id }}') {
+        if (logoSwiper) {
+          logoSwiper.destroy(true, true);
+          logoSwiper = null;
+        }
+        setupSwiper();
+      }
+    });
+
+    document.addEventListener('shopify:section:unload', function (event) {
+      if (event.target.id === 'shopify-section-{{ section.id }}') {
+        if (logoSwiper) {
+          logoSwiper.destroy(true, true);
+          logoSwiper = null;
+        }
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "NW Logo Carousel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "default": "Add Heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "unit": "px",
+      "default": 16,
+      "label": "Heading font size (Desktop)",
+      "min": 14,
+      "max": 20,
+      "step": 2
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "unit": "px",
+      "default": 16,
+      "label": "Heading font size (Mobile)",
+      "min": 14,
+      "max": 20,
+      "step": 2
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#0C187E"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background type",
+      "default": "solid",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "solid",
+          "label": "Solid color"
+        },
+        {
+          "value": "linear_gradient",
+          "label": "Linear gradient"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "visible_if": "{{ section.settings.background_type == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile background image",
+      "visible_if": "{{ section.settings.background_type == 'image' }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#C3EEFF",
+      "visible_if": "{{ section.settings.background_type == 'image' or section.settings.background_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(180deg, rgba(235, 233, 226, 1), rgba(255, 255, 255, 1) 100%)",
+      "visible_if": "{{ section.settings.background_type == 'linear_gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Top padding desktop",
+      "min": 0,
+      "max": 35,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding desktop",
+      "min": 0,
+      "max": 35,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding mobile",
+      "min": 0,
+      "max": 35,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding mobile",
+      "min": 0,
+      "max": 35,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nw_logo_box",
+      "name": "Logo",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Logo"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_img",
+          "label": "Logo image"
+        }
+      ]
+    }
+  ],
+  "class": "nw-logo-carousel",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "NW Logo Carousel",
+      "blocks": [
+        { "type": "nw_logo_box" },
+        { "type": "nw_logo_box" },
+        { "type": "nw_logo_box" },
+        { "type": "nw_logo_box" },
+        { "type": "nw_logo_box" }
+      ]
+    }
+  ]
+}
+{% endschema %}
