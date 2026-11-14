@@ -61,7 +61,7 @@
 
         {% if section.settings.use_h1 == true %}
           <h1 class="hero-title {{ anim_slide }}">{{ section.settings.title }}</h1>
-        {% else %}
+        {% else %}    
           <h2 class="hero-title {{ anim_slide }}">{{ section.settings.title }}</h2>
         {% endif %}
 
@@ -71,9 +71,7 @@
       </div>
 
       <div>
-        {% if section.settings.button_url != blank %}
-          <a href="{{ section.settings.button_url }}" class="primary-btn {{ anim_slide }}">{{ section.settings.button_label }}</a>
-        {% endif %}
+           <a href="{{ section.settings.button_url }}" class="primary-btn {{ anim_slide }}">{{ section.settings.button_label }}</a>
       </div>
     </div>
 
