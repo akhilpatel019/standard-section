@@ -63,6 +63,7 @@
   width: 100%;
   max-width: 100%;
   overflow: hidden;
+  padding: 10px 8px;
 }
 
 /* Continuous marquee animation timing */
@@ -77,6 +78,12 @@
   align-items: center;
   min-width: 0;
   box-sizing: border-box;
+  padding: 6px 4px;
+}
+
+.logo-slider .swiper-slide:hover {
+  z-index: 5;
+  position: relative;
 }
 
 .logo-item-link {
@@ -84,11 +91,10 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  padding: 4px;
 }
 
 .logo-item-link:hover {
-  transform: scale(1.06);
   opacity: 0.85;
 }
 
@@ -99,11 +105,13 @@
   max-width: 100%;
   object-fit: contain;
   margin: 0 auto;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+  will-change: transform;
 }
 
 .logo-slider .swiper-slide:hover img {
-  transform: scale(1.06);
+  transform: scale(1.08);
+  filter: brightness(1.05);
 }
 
 .logo-slider .swiper-slide svg.placeholder-svg {
@@ -117,6 +125,11 @@
 
 /* Desktop: Display logos evenly spaced in a row without swiper sliding */
 @media (min-width: 1024px) {
+  .logo-slider-wrapper,
+  .logo-slider {
+    overflow: visible;
+  }
+
   .logo-slider .swiper-wrapper {
     display: flex;
     justify-content: space-between;

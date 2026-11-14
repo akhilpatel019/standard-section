@@ -1,0 +1,438 @@
+{{ 'nw-best-sellers.css' | asset_url | stylesheet_tag }}
+{{ 'nw-section-heading.css' | asset_url | stylesheet_tag }}
+{{ 'nw-button.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign section_background = 'transparent'
+  assign show_media = false
+
+  case section.settings.background_type
+    when 'image'
+      assign section_background = section.settings.background_color
+      assign show_media = true
+    when 'solid'
+      assign section_background = section.settings.background_color
+    when 'linear_gradient'
+      assign section_background = section.settings.background_gradient
+    when 'none'
+      assign section_background = 'transparent'
+  endcase
+
+  if settings.animations_reveal_on_scroll
+    assign anim_slide = 'scroll-trigger animate--slide-in'
+    assign anim_fade  = 'scroll-trigger animate--fade-in'
+  else
+    assign anim_slide = ''
+    assign anim_fade  = ''
+  endif
+-%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .nw-collection-wrapper {
+    background: {{ section_background }};
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+  }
+
+  #shopify-section-{{ section.id }} .nw-collection-wrapper .section-title {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .nw-collection-wrapper {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .nw-collection-wrapper .section-title {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="nw-collection-wrapper {{ anim_fade }}">
+  {%- if show_media -%}
+    {%- liquid
+      assign bg_image = section.settings.image
+      assign bg_image_mobile = section.settings.mobile_image | default: bg_image
+    -%}
+    {%- if bg_image != blank -%}
+      <div class="nw-best-bg-media">
+        <picture>
+          {%- if bg_image_mobile != blank and bg_image_mobile != bg_image -%}
+            <source media="(max-width: 749px)" srcset="{{ bg_image_mobile | image_url: width: 1200 }}">
+          {%- endif -%}
+          {{
+            bg_image
+            | image_url: width: 2500
+            | image_tag: class: 'nw-best-bg-img', loading: 'lazy', alt: bg_image.alt
+            | default: ''
+            | escape
+          }}
+        </picture>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="page-width">
+    {%- render 'nw-section-heading', heading: section.settings.section_heading -%}
+
+    <div class="product-section-grid" {% if settings.animations_reveal_on_scroll %}data-cascade{% endif %}>
+      {% assign featured_collection = section.settings.best_sell_collection %}
+      {% if featured_collection != blank and featured_collection.products_count > 0 %}
+        {% for product in featured_collection.products %}
+          <div
+            class="product {{ anim_slide }}"
+            {% if settings.animations_reveal_on_scroll %}
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+          >
+            <div class="product-media">
+              <a href="{{ product.url }}">
+                {% if product.featured_image != blank %}
+                  {{
+                    product.featured_image
+                    | image_url: width: 600
+                    | image_tag: loading: 'lazy', alt: product.featured_image.alt | default: product.title | escape
+                  }}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </a>
+            </div>
+
+            <div class="product-badge">
+              {% assign product_badges = product.metafields.custom.product_badges.value %}
+              {% if product_badges != blank %}
+                {% for badge in product_badges %}
+                  {% case badge %}
+                    {% when 'JUNIOR PAINTING' %}
+                      <span class="junior-painting">{{ badge }}</span>
+                    {% when 'NEW' %}
+                      <span class="new">{{ badge }}</span>
+                    {% when 'DIPTYCH' %}
+                      <span class="diptych">{{ badge }}</span>
+                    {% else %}
+                      <span class="new">{{ badge }}</span>
+                  {% endcase %}
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="product-info">
+              <div class="product-rate">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0842/3030/7949/files/product-five-star.svg?v=1793790373"
+                  alt="5 star rating"
+                  width="100"
+                  height="16"
+                  loading="lazy"
+                >
+                <span>4 reviews</span>
+              </div>
+
+              <h3 class="product-title">
+                <a href="{{ product.url }}">
+                  {{ product.title }}
+                </a>
+              </h3>
+
+              <h6 class="product-prize">
+                {% if product.price_varies %}
+                  {{ product.price_min | money }} to {{ product.price_max | money }}
+                {% else %}
+                  {{ product.price | money }}
+                {% endif %}
+              </h6>
+            </div>
+
+            {% form 'product', product, class: 'product-form' %}
+              <input
+                type="hidden"
+                name="id"
+                value="{{ product.selected_or_first_available_variant.id }}"
+              >
+
+              <button
+                type="submit"
+                name="add"
+                class="product-btn"
+                {% unless product.available %}
+                  disabled
+                {% endunless %}
+              >
+                <span>
+                  {% if product.available %}
+                    Add to Cart
+                  {% else %}
+                    Sold Out
+                  {% endif %}
+                </span>
+
+                {% if product.available %}
+                  <span>
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0842/3030/7949/files/plus-icon.svg?v=1793790684"
+                      alt=""
+                      width="12"
+                      height="12"
+                    >
+                  </span>
+                {% endif %}
+              </button>
+            {% endform %}
+          </div>
+        {% endfor %}
+      {% else %}
+        {%- for i in (1..4) -%}
+          <div
+            class="product {{ anim_slide }}"
+            {% if settings.animations_reveal_on_scroll %}
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+          >
+            <div class="product-media">
+              <a href="#">
+                {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+              </a>
+            </div>
+
+            <div class="product-badge">
+              <span class="new">BEST SELLER</span>
+            </div>
+
+            <div class="product-info">
+              <div class="product-rate">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0842/3030/7949/files/product-five-star.svg?v=1793790373"
+                  alt="5 star rating"
+                  width="100"
+                  height="16"
+                  loading="lazy"
+                >
+                <span>5 reviews</span>
+              </div>
+
+              <h3 class="product-title">
+                <a href="#">Painting Kit {{ i }}</a>
+              </h3>
+
+              <h6 class="product-prize">$45.00</h6>
+            </div>
+
+            <button type="button" class="product-btn">
+              <span>Add to Cart</span>
+              <span>
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0842/3030/7949/files/plus-icon.svg?v=1793790684"
+                  alt=""
+                  width="12"
+                  height="12"
+                >
+              </span>
+            </button>
+          </div>
+        {%- endfor -%}
+      {% endif %}
+    </div>
+
+    {%- if section.settings.btn_lbl != blank or section.settings.closing_text != blank -%}
+      <div class="product-btn-box {{ anim_slide }}">
+        {%- if section.settings.btn_lbl != blank -%}
+          <a
+            href="{{ section.settings.btn_url | default: featured_collection.url | default: routes.all_products_collection_url }}"
+            class="primary-btn"
+          >
+            {{ section.settings.btn_lbl }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.closing_text != blank -%}
+          <div class="product-closing-text">
+            {{ section.settings.closing_text }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NW Best Sellers",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection"
+    },
+    {
+      "type": "collection",
+      "id": "best_sell_collection",
+      "label": "Select collection"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "default": "Heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "unit": "px",
+      "default": 40,
+      "label": "Heading font size (Desktop)",
+      "min": 20,
+      "max": 50,
+      "step": 2
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "unit": "px",
+      "default": 22,
+      "label": "Heading font size (Mobile)",
+      "min": 20,
+      "max": 30,
+      "step": 2
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#0C187E"
+    },
+    {
+      "type": "header",
+      "content": "Button & Text"
+    },
+    {
+      "type": "text",
+      "id": "btn_lbl",
+      "label": "Button label",
+      "default": "SHOP ALL"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button link"
+    },
+    {
+      "type": "richtext",
+      "default": "<p>Closure Line</p>",
+      "id": "closing_text",
+      "label": "Closing text"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background type",
+      "default": "solid",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "solid",
+          "label": "Solid color"
+        },
+        {
+          "value": "linear_gradient",
+          "label": "Linear gradient"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "visible_if": "{{ section.settings.background_type == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile background image",
+      "visible_if": "{{ section.settings.background_type == 'image' }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF",
+      "visible_if": "{{ section.settings.background_type == 'image' or section.settings.background_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(180deg, rgba(235, 233, 226, 1), rgba(255, 255, 255, 1) 100%)",
+      "visible_if": "{{ section.settings.background_type == 'linear_gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Top padding desktop",
+      "min": 0,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding desktop",
+      "min": 0,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding mobile",
+      "min": 30,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding mobile",
+      "min": 30,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [],
+  "class": "nw-best-seller",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "NW Best Sellers"
+    }
+  ]
+}
+{% endschema %}
