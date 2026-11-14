@@ -1,0 +1,295 @@
+{{ 'nw-section-heading.css' | asset_url | stylesheet_tag }}
+{{ 'nw-category.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign section_background = 'transparent'
+  assign show_media = false
+
+  case section.settings.background_type
+    when 'image'
+      assign section_background = section.settings.background_color
+      assign show_media = true
+    when 'solid'
+      assign section_background = section.settings.background_color
+    when 'linear_gradient'
+      assign section_background = section.settings.background_gradient
+    when 'none'
+      assign section_background = 'transparent'
+  endcase
+
+  if settings.animations_reveal_on_scroll
+    assign anim_slide = 'scroll-trigger animate--slide-in'
+    assign anim_fade  = 'scroll-trigger animate--fade-in'
+  else
+    assign anim_slide = ''
+    assign anim_fade  = ''
+  endif
+-%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .nw-category-wrapper {
+      background: {{ section_background }};
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .nw-category-wrapper .section-title {
+      color: {{ section.settings.heading_color }};
+      font-size: {{ section.settings.heading_size }}px;
+    }
+
+    @media screen and (max-width: 749px) {
+      #shopify-section-{{ section.id }} .nw-category-wrapper {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      }
+
+      #shopify-section-{{ section.id }} .nw-category-wrapper .section-title {
+        font-size: {{ section.settings.heading_size_mobile }}px;
+      }
+    }
+{% endstyle %}
+
+<div class="nw-category-wrapper {{ anim_fade }}">
+
+  {%- if show_media -%}
+    {%- liquid
+      assign bg_image = section.settings.image
+      assign bg_image_mobile = section.settings.mobile_image | default: bg_image
+    -%}
+    {%- if bg_image != blank -%}
+      <div class="nw-cat-bg-media">
+        <picture>
+          {%- if bg_image_mobile != blank and bg_image_mobile != bg_image -%}
+            <source media="(max-width: 749px)" srcset="{{ bg_image_mobile | image_url: width: 1200 }}">
+          {%- endif -%}
+          {{
+            bg_image
+            | image_url: width: 2500
+            | image_tag: class: 'nw-cat-bg-img', loading: 'lazy', alt: bg_image.alt
+            | default: ''
+            | escape
+          }}
+        </picture>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+  <div class="page-width">
+    {%- render 'nw-section-heading', heading: section.settings.section_heading -%}
+
+    <div class="collection-grid" {% if settings.animations_reveal_on_scroll %}data-cascade{% endif %}>
+      {% if section.settings.category_list != blank and section.settings.category_list.count > 0 %}
+        {% for collection in section.settings.category_list %}
+          <div
+            class="collection-card {{ anim_slide }}"
+            {% if settings.animations_reveal_on_scroll %}
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+          >
+            <a href="{{ collection.url }}" class="collection-card-link">
+              <div class="collection-media">
+                {% if collection.featured_image != blank %}
+                  <img
+                    src="{{ collection.featured_image | image_url: width: 600 }}"
+                    alt="{{ collection.featured_image.alt | default: collection.title | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  />
+                {% else %}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+
+              <div class="collection-text">
+                <h3>{{ collection.title }}</h3>
+                <p>{{ collection.products_count }} {{ collection.products_count | pluralize: 'painting', 'paintings' }}</p>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        {%- for i in (1..4) -%}
+          <div
+            class="collection-card {{ anim_slide }}"
+            {% if settings.animations_reveal_on_scroll %}
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+          >
+            <a href="#" class="collection-card-link">
+              <div class="collection-media">
+                {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+
+              <div class="collection-text">
+                <h3>Example Category {{ i }}</h3>
+                <p>12 paintings</p>
+              </div>
+            </a>
+          </div>
+        {%- endfor -%}
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "NW Category",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Category"
+    },
+    {
+      "type": "collection_list",
+      "id": "category_list",
+      "label": "Select Collections"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "default": "Heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "unit": "px",
+      "default": 40,
+      "label": "Heading font size (Desktop)",
+      "min": 20,
+      "max": 50,
+      "step": 2
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "unit": "px",
+      "default": 22,
+      "label": "Heading font size (Mobile)",
+      "min": 20,
+      "max": 30,
+      "step": 2
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#0C187E"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background type",
+      "default": "solid",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "solid",
+          "label": "Solid color"
+        },
+        {
+          "value": "linear_gradient",
+          "label": "Linear gradient"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "visible_if": "{{ section.settings.background_type == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile background image",
+      "visible_if": "{{ section.settings.background_type == 'image' }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF",
+      "visible_if": "{{ section.settings.background_type == 'image' or section.settings.background_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(180deg, rgba(235, 233, 226, 1), rgba(255, 255, 255, 1) 100%)",
+      "visible_if": "{{ section.settings.background_type == 'linear_gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Top padding desktop",
+      "min": 0,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding desktop",
+      "min": 0,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding mobile",
+      "min": 30,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding mobile",
+      "min": 30,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [],
+  "class": "nw-category",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "NW Category"
+    }
+  ]
+}
+{% endschema %}
