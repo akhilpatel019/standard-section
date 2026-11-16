@@ -112,6 +112,9 @@
 {% schema %}
   {
     "name": "NW Split Content Banner",
+     "disabled_on": {
+    "groups": ["aside"]
+  },
     "settings": [
       {
         "type": "radio",
@@ -137,7 +140,8 @@
         "step": 10,
         "unit": "px",
         "label": "Desktop height",
-        "default": 650
+        "default": 650,
+        "info": "Desktop: Required minimum height is 650px to ensure all content fits properly."
       },
       {
         "visible_if": "{{ section.settings.height == 'fixed' }}",
@@ -148,7 +152,8 @@
         "step": 10,
         "unit": "px",
         "label": "Mobile height",
-        "default": 550
+        "default": 550,
+        "info": "Mobile: Required minimum height is 550px to ensure all content fits properly."
       },
       {
         "type": "color",

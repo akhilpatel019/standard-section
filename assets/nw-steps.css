@@ -1,0 +1,141 @@
+.how-it-work{
+  margin-top: clamp(4rem, 6vw, 10rem);
+  position: relative;
+    width: 100%;
+}
+
+.how-it-work .page-width { 
+      position: relative;
+  z-index: 1;
+}
+
+
+.nw-steps-bg-media{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nw-steps-bg-media picture,
+.nw-steps-bg-media img.nw-step-bg-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.how-it-work::before {
+  content: "";
+  position: absolute;
+  bottom: 99.5%;
+  left: 0;
+  width: 100%;
+  height: clamp(40px, 6vw, 100px);
+  background-image: url("https://cdn.shopify.com/s/files/1/0787/6486/7659/files/how-it-work-top.webp?v=1794810132");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.how-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.how-it-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+
+.hiw-number {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-family: var(--heading-font);
+    color: var(--text-color);
+  font-weight: 800;
+  z-index: 1;
+}
+
+.hiw-number::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 78px;
+  height: 78px;
+  background-image: url("https://cdn.shopify.com/s/files/1/0842/3030/7949/files/hiw-nuber-bg.png?v=1793855292");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  z-index: -1;
+}
+
+.how-it-steps h5 {
+    font-size: 29px;
+    font-weight: 400;
+    color: var(--text-color);
+    text-align: center;
+    max-width: 250px;
+    font-family: var(--body-font);
+}
+
+@media (max-width: 767px) {
+  .how-it-work::before {
+    height: clamp(60px, 24vw, 120px);
+    background-image: url("https://cdn.shopify.com/s/files/1/0842/3030/7949/files/hiw-top-mobile.png?v=1793855291");
+    background-size: 100% 100%;
+    background-position: center;
+  }
+
+  .how-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: max-content;
+    margin: 40px auto 0 auto;
+    gap: 25px;
+  }
+
+  .how-it-steps {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .how-it-steps h5 {
+    font-size: 18px;
+    text-align: left;
+  }
+  
+  .how-it-work {
+    margin-top: clamp(6rem, 24vw, 12rem);
+  }
+}
+
+
+
+@media (max-width: 400px) {
+  .how-it-steps h5 {
+    font-size: 17px;
+  }
+}

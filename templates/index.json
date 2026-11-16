@@ -136,12 +136,55 @@
         "padding_top_mobile": 36,
         "padding_bottom_mobile": 36
       }
+    },
+    "nw_steps_Fd7MUP": {
+      "type": "nw-steps",
+      "blocks": {
+        "nw_steps_block_BNVnKq": {
+          "type": "nw-steps-block",
+          "settings": {
+            "step_title": "Choose & order your painting kits."
+          }
+        },
+        "nw_steps_block_AkzWki": {
+          "type": "nw-steps-block",
+          "settings": {
+            "step_title": "Receive your supplies."
+          }
+        },
+        "nw_steps_block_BLFwhd": {
+          "type": "nw-steps-block",
+          "settings": {
+            "step_title": "Paint your masterpiece."
+          }
+        }
+      },
+      "block_order": [
+        "nw_steps_block_BNVnKq",
+        "nw_steps_block_AkzWki",
+        "nw_steps_block_BLFwhd"
+      ],
+      "name": "NW Steps",
+      "settings": {
+        "section_heading": "How it works?",
+        "heading_size": 40,
+        "heading_size_mobile": 22,
+        "heading_color": "#0c187e",
+        "background_type": "solid",
+        "background_color": "#c3eeff",
+        "background_gradient": "linear-gradient(180deg, rgba(235, 233, 226, 1), rgba(255, 255, 255, 1) 100%)",
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 64,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 36
+      }
     }
   },
   "order": [
     "nw_main_banner_section_cBkQiE",
     "nw_logo_carousel_9h377N",
     "nw_best_sellers_EhPkXi",
-    "nw_category_P8CwyE"
+    "nw_category_P8CwyE",
+    "nw_steps_Fd7MUP"
   ]
 }

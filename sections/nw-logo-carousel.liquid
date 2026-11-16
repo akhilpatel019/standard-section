@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+{{ 'swiper-slide.css' | asset_url | stylesheet_tag }}
 {{ 'nw-logo.css' | asset_url | stylesheet_tag }}
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ 'swiper-slide.js' | asset_url }}" defer></script>
 
 {%- liquid
   assign loading = 'lazy'
@@ -211,6 +211,9 @@
 {% schema %}
 {
   "name": "NW Logo Carousel",
+   "disabled_on": {
+    "groups": ["aside"]
+  },
   "settings": [
     {
       "type": "header",

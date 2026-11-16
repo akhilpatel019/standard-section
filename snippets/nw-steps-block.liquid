@@ -1,0 +1,17 @@
+<div
+  class="how-it-steps {{ anim_slide }}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    style="--animation-order: {{ index }};"
+  {% endif %}
+>
+  <div class="hiw-number">{{ index }}</div>
+
+  <h5>
+    {% if block.settings.step_title != blank %}
+      {{ block.settings.step_title }}
+    {% else %}
+      Title {{ index }}
+    {% endif %}
+  </h5>
+</div>
