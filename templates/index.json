@@ -178,6 +178,63 @@
         "padding_top_mobile": 36,
         "padding_bottom_mobile": 36
       }
+    },
+    "nw_video_carousel_4FbBtq": {
+      "type": "nw-video-carousel",
+      "blocks": {
+        "nw_video_slide_U8p8tA": {
+          "type": "nw-video-slide",
+          "settings": {
+            "video_thumb": "shopify://shop_images/v-slide-1-img.png",
+            "video": "shopify://files/videos/720p.mp4",
+            "video_title": "Kids Painting Party"
+          }
+        },
+        "nw_video_slide_FjhYDE": {
+          "type": "nw-video-slide",
+          "settings": {
+            "video_thumb": "shopify://shop_images/v-slide-2-img.png",
+            "video": "shopify://files/videos/720p.mp4",
+            "video_title": "SOLO painting"
+          }
+        },
+        "nw_video_slide_XRQLJT": {
+          "type": "nw-video-slide",
+          "settings": {
+            "video_thumb": "shopify://shop_images/v-slide-3-img.png",
+            "video": "shopify://files/videos/720p.mp4",
+            "video_title": "Date Night Painting"
+          }
+        },
+        "nw_video_slide_zrabV6": {
+          "type": "nw-video-slide",
+          "settings": {
+            "video_thumb": "shopify://shop_images/v-slide-4-img.png",
+            "video": "shopify://files/videos/720p.mp4",
+            "video_title": "Couple night painting"
+          }
+        }
+      },
+      "block_order": [
+        "nw_video_slide_U8p8tA",
+        "nw_video_slide_FjhYDE",
+        "nw_video_slide_XRQLJT",
+        "nw_video_slide_zrabV6"
+      ],
+      "name": "NW Video Carousel",
+      "settings": {
+        "section_heading": "Viral makes this month!",
+        "heading_size": 40,
+        "heading_size_mobile": 22,
+        "heading_color": "#0C187E",
+        "background_type": "solid",
+        "background_color": "#fff",
+        "background_gradient": "linear-gradient(180deg, rgba(235, 233, 226, 1), rgba(255, 255, 255, 1) 100%)",
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 64,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 36
+      }
     }
   },
   "order": [
@@ -185,6 +242,7 @@
     "nw_logo_carousel_9h377N",
     "nw_best_sellers_EhPkXi",
     "nw_category_P8CwyE",
-    "nw_steps_Fd7MUP"
+    "nw_steps_Fd7MUP",
+    "nw_video_carousel_4FbBtq"
   ]
 }

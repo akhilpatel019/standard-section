@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "tui-swiper": {
+      "source": "full-stack-skills/t2ui-skills",
+      "commit": "78ddc48d807e92cac8bff502062cd305c394c095",
+      "sourceType": "github",
+      "skillPath": "skills/tui-swiper/SKILL.md",
+      "computedHash": "a1854106461c31f876e7a075df016ac925dab377a91d4565c0c3bcca0a23006e"
+    }
+  }
+}

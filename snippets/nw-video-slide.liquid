@@ -1,0 +1,32 @@
+{%- assign poster = block.settings.video_thumb | default: block.settings.video.preview_image -%}
+
+<div class="swiper-slide video-slide" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="video-card">
+    <div class="video-poster-box">
+      {% if poster != blank %}
+        <video
+          poster="{{ poster | image_url: width: 800 }}"
+          playsinline
+          preload="metadata"
+        >
+          {% for source in block.settings.video.sources %}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {% endfor %}
+        </video>
+      {% else %}
+        <img
+          src="https://cdn.shopify.com/s/files/1/0787/6486/7659/files/placeholder-images-image_large-Photoroom.png?v=1794824608"
+          alt="Video placeholder"
+          class="video-placeholder-img"
+          loading="lazy"
+        >
+      {% endif %}
+      <button class="play-btn" aria-label="Play Video">
+        <img src="https://cdn.shopify.com/s/files/1/0842/3030/7949/files/v-play-btn.svg?v=1793860698" alt="Play" />
+      </button>
+    </div>
+    <div class="video-card-info">
+      <h4>{{ block.settings.video_title }}</h4>
+    </div>
+  </div>
+</div>
