@@ -1,0 +1,419 @@
+/* ============================================================
+   NW Reviews Carousel — Styles
+   Isolated slider styling matching video carousel behavior
+   ============================================================ */
+
+/* ── Section wrapper ── */
+.review-slider-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: clamp(3.5rem, 5.5vw, 8rem);
+  margin-bottom: clamp(3.5rem, 5.5vw, 8rem);
+  /* overflow: hidden; */
+}
+
+.review-slider-wrapper::before {
+    content: "";
+    position: absolute;
+    bottom: 95%;
+    left: 0;
+    width: 100%;
+    height: clamp(3.5rem, 5.5vw, 8rem);
+    background-image: url("https://cdn.shopify.com/s/files/1/0787/6486/7659/files/review-section-top-bottom.png?v=1794900337");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transform: scaleY(-1);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.review-slider-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 95%;
+    left: 0;
+    width: 100%;
+    height: clamp(3.5rem, 5.5vw, 8rem);
+    background-image: url("https://cdn.shopify.com/s/files/1/0787/6486/7659/files/review-section-top-bottom.png?v=1794900337");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+    
+/* ── Decorative background shapes ── */
+.review-shape {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.review-shape-top-left {
+  top: 0;
+  left: 0;
+  max-width: 126px;
+  height: auto;
+}
+
+.review-shape-bottom-right {
+  bottom: 0;
+  right: 0;
+  max-width: 130px;
+  height: auto;
+}
+
+/* ── Background media ── */
+.nw-rs-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nw-rs-bg picture,
+.nw-rs-bg img.nw-rs-bg-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ── Header & Badge ── */
+.review-header-width {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.review-title-box {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.review-title-bottom-img {
+    width: clamp(16rem, 24vw, 30rem);
+    height: auto;
+    margin-top: 1.4rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    z-index: 1;
+}
+
+.review-badge-img {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110px;
+  height: 110px;
+  pointer-events: none;
+}
+
+/* ── Full width slider container ── */
+.review-slider-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Swiper instance ── */
+.reviewSwiper {
+  width: 100%;
+  padding: 10px 20px 20px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 749px) {
+  .reviewSwiper {
+    padding: 6px 16px 16px;
+  }
+}
+
+/* ── Slide items ── */
+.reviewSwiper .swiper-slide,
+.review-slide.swiper-slide,
+.review-slide {
+  width: 340px !important;
+  flex-shrink: 0;
+  height: auto;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 749px) {
+  .reviewSwiper .swiper-slide,
+  .review-slide.swiper-slide,
+  .review-slide {
+    width: 82vw !important;
+    max-width: 320px !important;
+  }
+}
+
+/* ── Review card ── */
+.review-card {
+  background-color: #ffffff;
+  border: 1.5px solid #d0d5e8;
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.review-card:hover {
+  border-color: #7383d0;
+  box-shadow: 0 4px 14px rgba(12, 24, 126, 0.08);
+}
+
+/* ── Review image ── */
+.review-card-img {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background-color: #f3f4f6;
+  margin-bottom: 12px;
+}
+
+.review-card-img img,
+.review-card-img svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Card header (User & Rating) ── */
+.review-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.reviewer-info .verified-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.reviewer-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0c187e;
+  font-family: var(--body-font, sans-serif);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Star rating ── */
+.review-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.review-rating .star-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.review-rating .star-icon--filled path {
+  fill: #f9de4e;
+}
+
+.review-rating .star-icon--empty path {
+  fill: #e0e0e0;
+}
+
+/* ── Card Title & Text ── */
+.review-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0c187e;
+  margin: 0 0 8px;
+  line-height: 1.35;
+  font-family: var(--body-font, sans-serif);
+}
+
+.review-card-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #374151;
+  margin: 0 0 16px;
+  font-family: var(--body-font, sans-serif);
+}
+
+.review-card-text p {
+  margin: 0;
+}
+
+/* ── Card Footer ── */
+.review-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid #eef2f6;
+}
+
+.painted-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.painted-badge {
+  background: #ebf3f8;
+  color: #0c187e;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--body-font, sans-serif);
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* ── Controls: `<` ··· `>` ── */
+.review-swiper-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.review-swiper-prev,
+.review-swiper-next {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #0c187e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  line-height: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.review-swiper-prev svg,
+.review-swiper-next svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  stroke: #0c187e;
+}
+
+.review-swiper-prev:hover,
+.review-swiper-next:hover {
+  transform: scale(1.2);
+}
+
+.review-swiper-prev.swiper-button-disabled,
+.review-swiper-next.swiper-button-disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Custom Pagination dots ── */
+.review-swiper-pagination {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto !important;
+  line-height: 0;
+}
+
+.review-swiper-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  border: 1px solid #7383d0;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.review-swiper-dot:hover {
+  border-color: #0c187e;
+}
+
+.review-swiper-dot.is-active {
+  background-color: #0c187e;
+  border-color: #0c187e;
+  transform: scale(1.15);
+}
+
+/* ── Responsive adjustments ── */
+@media screen and (max-width: 749px) {
+  .review-header-width {
+    margin-bottom: 24px;
+  }
+
+  .review-badge-img {
+    width: 75px;
+    height: 75px;
+    right: 12px;
+  }
+
+  .review-shape-top-left {
+    max-width: 80px;
+  }
+
+  .review-shape-bottom-right {
+    max-width: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .review-badge-img {
+    display: none;
+  }
+
+  .review-card-title {
+    font-size: 15px;
+  }
+
+  .review-card-text {
+    font-size: 13px;
+  }
+}

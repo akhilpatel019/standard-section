@@ -58,17 +58,21 @@
 }
 
 /* ── Slide items ── */
+.nw-vc-swiper .swiper-slide,
+.video-slide.swiper-slide,
 .video-slide {
-  width: 300px;
+  width: 300px !important;
   flex-shrink: 0;
   height: auto;
   box-sizing: border-box;
 }
 
 @media screen and (max-width: 749px) {
+  .nw-vc-swiper .swiper-slide,
+  .video-slide.swiper-slide,
   .video-slide {
-    width: 78vw;
-    max-width: 300px;
+    width: 78vw !important;
+    max-width: 300px !important;
   }
 }
 

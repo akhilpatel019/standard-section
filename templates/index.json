@@ -226,9 +226,66 @@
         "section_heading": "Viral makes this month!",
         "heading_size": 40,
         "heading_size_mobile": 22,
-        "heading_color": "#0C187E",
+        "heading_color": "#0c187e",
         "background_type": "solid",
         "background_color": "#fff",
+        "background_gradient": "linear-gradient(180deg, rgba(235, 233, 226, 1), rgba(255, 255, 255, 1) 100%)",
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 64,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 36
+      }
+    },
+    "nw_reviews_PYaekN": {
+      "type": "nw-reviews",
+      "blocks": {
+        "nw_review_slide_HkydWf": {
+          "type": "nw-review-slide",
+          "settings": {
+            "review_img": "shopify://shop_images/review-card-img-1.png",
+            "username": "Latifah H.",
+            "star_rating": 5,
+            "review_heading": "&nbsp;BEST DATE NIGHT EVER!&nbsp;",
+            "review_description": "<p>We had an amazing time & enjoyed the experience. The video was fun, easy, convenient, empowered to follow. It’s definitely an experience worth trying.</p>",
+            "review_painting_name": "Lovestruck Robot"
+          }
+        },
+        "nw_review_slide_BNFxwj": {
+          "type": "nw-review-slide",
+          "settings": {
+            "review_img": "shopify://shop_images/review-card-img-2.png",
+            "username": "Maria M.",
+            "star_rating": 5,
+            "review_heading": "&nbsp;EVERYONE LOVED IT!&nbsp;",
+            "review_description": "<p>Everyone in the family participated and had a blast. Great step-by-step guidance. Will definitely be ordering more kits soon!</p>",
+            "review_painting_name": "Lotus"
+          }
+        },
+        "nw_review_slide_7wqPFp": {
+          "type": "nw-review-slide",
+          "settings": {
+            "review_img": "shopify://shop_images/review-card-img-3.png",
+            "username": "Emery A.",
+            "star_rating": 5,
+            "review_heading": "&nbsp;PERFECT FAMILY ACTIVITY!&nbsp;",
+            "review_description": "<p>Lorem ipsum dolor sit amet consectetur. Convallis vel mus nisi orci nibh. Eget cras sit sem id placerat accumsan. Et ultrices mi nisi sed lorem at massa interdum.</p>",
+            "review_painting_name": "Moonlight Palms"
+          }
+        }
+      },
+      "block_order": [
+        "nw_review_slide_HkydWf",
+        "nw_review_slide_BNFxwj",
+        "nw_review_slide_7wqPFp"
+      ],
+      "name": "NW Review Slider",
+      "settings": {
+        "section_heading": "Join Over 200,000+ Happy Customers&nbsp;",
+        "heading_size": 40,
+        "heading_size_mobile": 22,
+        "heading_color": "#0c187e",
+        "background_type": "solid",
+        "background_color": "#c3eeff",
         "background_gradient": "linear-gradient(180deg, rgba(235, 233, 226, 1), rgba(255, 255, 255, 1) 100%)",
         "padding_top_desktop": 64,
         "padding_bottom_desktop": 64,
@@ -243,6 +300,7 @@
     "nw_best_sellers_EhPkXi",
     "nw_category_P8CwyE",
     "nw_steps_Fd7MUP",
-    "nw_video_carousel_4FbBtq"
+    "nw_video_carousel_4FbBtq",
+    "nw_reviews_PYaekN"
   ]
 }

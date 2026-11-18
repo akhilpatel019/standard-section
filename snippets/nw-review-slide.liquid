@@ -1,0 +1,69 @@
+{%- assign rating = block.settings.star_rating | default: 5 -%}
+
+<div class="swiper-slide review-slide" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="review-card">
+    {% if block.settings.review_img != blank %}
+      <div class="review-card-img">
+        {{
+          block.settings.review_img
+          | image_url: width: 600
+          | image_tag: alt: 'Review photo', loading: 'lazy'
+        }}
+      </div>
+    {% else %}
+      <div class="review-card-img">
+        {%- assign placeholder_index = index | default: forloop.index | default: 1 | minus: 1 | modulo: 6 | plus: 1 -%}
+        {{ 'product-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endif %}
+
+    <div class="review-card-header">
+      <div class="reviewer-info">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0787/6486/7659/files/verified-icon.svg?v=1794896040"
+          class="verified-icon"
+          alt="Verified"
+          width="16"
+          height="16"
+          loading="lazy"
+        />
+        <span class="reviewer-name">@{{ block.settings.username }}</span>
+      </div>
+      <div class="review-rating" role="img" aria-label="{{ rating }} out of 5 stars">
+        {%- for i in (1..5) -%}
+          <svg
+            class="star-icon {% if i <= rating %}star-icon--filled{% else %}star-icon--empty{% endif %}"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M22.5901 10.64L17.0001 14.7L19.1301 21.27C19.1963 21.4711 19.197 21.6881 19.132 21.8897C19.067 22.0912 18.9397 22.2669 18.7684 22.3915C18.5972 22.516 18.3908 22.583 18.179 22.5827C17.9673 22.5825 17.761 22.515 17.5901 22.39L12.0001 18.33L6.41009 22.39C6.23914 22.515 6.03293 22.5825 5.82117 22.5827C5.60941 22.583 5.40303 22.516 5.23177 22.3915C5.06051 22.2669 4.93321 22.0912 4.86821 21.8897C4.80322 21.6881 4.80387 21.4711 4.87009 21.27L7.00009 14.7L1.41009 10.64C1.23942 10.5153 1.11265 10.3398 1.04797 10.1385C0.983293 9.93732 0.984035 9.72078 1.05009 9.52001C1.1179 9.31116 1.25256 9.13044 1.43329 9.00573C1.61402 8.88103 1.83078 8.81927 2.05009 8.83001H8.91009L11.0501 2.25001C11.1159 2.04994 11.2431 1.87574 11.4137 1.75224C11.5843 1.62874 11.7895 1.56226 12.0001 1.56226C12.2107 1.56226 12.4159 1.62874 12.5865 1.75224C12.7571 1.87574 12.8843 2.04994 12.9501 2.25001L15.0901 8.83001H22.0001C22.211 8.83016 22.4164 8.89698 22.587 9.0209C22.7576 9.14483 22.8847 9.31952 22.9501 9.52001C23.0161 9.72078 23.0169 9.93732 22.9522 10.1385C22.8875 10.3398 22.7608 10.5153 22.5901 10.64Z"
+              fill="{% if i <= rating %}#f9de4e{% else %}#e0e0e0{% endif %}"
+            />
+          </svg>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {% if block.settings.review_heading != blank %}
+      <h3 class="review-card-title">{{ block.settings.review_heading }}</h3>
+    {% endif %}
+
+    {% if block.settings.review_description != blank %}
+      <div class="review-card-text">
+        {{ block.settings.review_description }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.review_painting_name != blank %}
+      <div class="review-card-footer">
+        <span class="painted-label">Painted:</span>
+        <span class="painted-badge">{{ block.settings.review_painting_name }}</span>
+      </div>
+    {% endif %}
+  </div>
+</div>

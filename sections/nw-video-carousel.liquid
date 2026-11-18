@@ -189,6 +189,8 @@
       loop: canLoop,
       spaceBetween: 14,
       grabCursor: true,
+      observer: true,
+      observeParents: true,
       navigation: {
         nextEl: sectionEl.querySelector('.nw-vc-next'),
         prevEl: sectionEl.querySelector('.nw-vc-prev'),
@@ -326,6 +328,7 @@
   document.addEventListener('shopify:block:select', function (e) {
     var sectionEl = document.querySelector('#shopify-section-{{ section.id }}');
     if (!sectionEl || !swiperInstance) return;
+    if (e.target && !sectionEl.contains(e.target)) return;
 
     var blockId = e.detail && e.detail.blockId;
     var targetEl = e.target;
@@ -334,10 +337,10 @@
     if (blockId) {
       slide = sectionEl.querySelector('.swiper-slide[data-block-id="' + blockId + '"]:not([data-nw-clone="true"])');
     }
-    if (!slide && targetEl) {
+    if (!slide && targetEl && sectionEl.contains(targetEl)) {
       slide = targetEl.closest('.swiper-slide');
     }
-    if (!slide) return;
+    if (!slide || !sectionEl.contains(slide)) return;
 
     // 1. Stop autoplay while editing this slide
     if (swiperInstance.autoplay && swiperInstance.autoplay.running) {
@@ -361,6 +364,7 @@
   document.addEventListener('shopify:block:deselect', function (e) {
     var sectionEl = document.querySelector('#shopify-section-{{ section.id }}');
     if (!sectionEl || !swiperInstance) return;
+    if (e.target && !sectionEl.contains(e.target)) return;
 
     if (swiperInstance.autoplay && !swiperInstance.autoplay.running) {
       swiperInstance.autoplay.start();
@@ -381,7 +385,7 @@
       "content": "Content"
     },
     {
-      "type": "text",
+      "type": "inline_richtext",
       "id": "section_heading",
       "default": "Heading",
       "label": "Heading"
@@ -532,6 +536,7 @@
   "presets": [
     {
       "name": "NW Video Carousel",
+      "category": "NW Sections",
       "blocks": [
         { "type": "nw-video-slide" },
         { "type": "nw-video-slide" },
