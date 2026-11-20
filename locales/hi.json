@@ -1,0 +1,159 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "announcements": {
+      "previous_announcement": "पिछली घोषणा",
+      "next_announcement": "अगली घोषणा",
+      "carousel": "कैरोज़ल",
+      "announcement": "घोषणा",
+      "announcement_bar": "घोषणा पट्टी"
+    },
+    "header": {
+      "announcement": "घोषणा",
+      "menu": "मेनू",
+      "cart_count": {
+        "one": "{{ count }} आइटम",
+        "other": "{{ count }} चीज़ें"
+      }
+    },
+    "cart": {
+      "title": "आपका कार्ट",
+      "caption": "कार्ट आइटम",
+      "remove_title": "हटाएँ {{ title }}",
+      "estimated_total": "अनुमानित कुल",
+      "new_estimated_total": "नया अनुमानित कुल",
+      "note": "ऑर्डर के लिए विशेष निर्देश",
+      "checkout": "देखें",
+      "empty": "आपका कार्ट खाली है",
+      "product_disclosure": "उत्पाद प्रकटीकरण",
+      "product_disclosures": "उत्पाद संबंधी प्रकटीकरण",
+      "cart_error": "आपके कार्ट को अपडेट करते समय एक त्रुटि हुई। कृपया पुनः प्रयास करें।",
+      "cart_quantity_error_html": "आप इस आइटम की केवल {{ quantity }} अपने कार्ट में जोड़ सकते हैं।",
+      "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "<p dir=\"ltr\">शुल्क और कर शामिल हैं। छूट और <a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">शिपिंग</a> की गणना चेकआउट पर की जाएगी।</p>",
+      "duties_and_taxes_included_shipping_at_checkout_without_policy": "शुल्क और कर शामिल हैं। छूट और शिपिंग की गणना चेकआउट पर की जाएगी।",
+      "taxes_included_shipping_at_checkout_with_policy_html": "<p>कर शामिल हैं। छूट और <a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">शिपिंग</a> का हिसाब चेकआउट के समय लगाया जाएगा।</p>",
+      "taxes_included_shipping_at_checkout_without_policy": "कर शामिल हैं। छूट और शिपिंग की गणना चेकआउट पर की जाएगी।",
+      "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "शुल्क शामिल हैं। टैक्स, छूट और <a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">शिपिंग</a> की गणना चेकआउट पर की जाएगी।",
+      "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "शुल्क शामिल हैं। टैक्स, छूट और शिपिंग की गणना चेकआउट पर की जाएगी।",
+      "taxes_at_checkout_shipping_at_checkout_with_policy_html": "टैक्स, छूट और <a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">शिपिंग</a> का हिसाब चेकआउट के समय लगाया जाएगा।",
+      "taxes_at_checkout_shipping_at_checkout_without_policy": "टैक्स, छूट और शिपिंग की गणना चेकआउट पर की जाएगी।",
+      "headings": {
+        "product": "उत्पाद",
+        "price": "कीमत",
+        "total": "कुल",
+        "quantity": "मात्रा",
+        "image": "उत्पाद की छवि"
+      },
+      "update": "अपडेट",
+      "login": {
+        "title": "क्या आपका खाता है?",
+        "paragraph_html": "<a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\" class=\"link underlined-link\">लॉग इन करें</a> ताकि आप तेज़ी से चेक आउट कर सकें।"
+      }
+    },
+    "footer": {
+      "payment": "भुगतान के तरीके"
+    },
+    "featured_blog": {
+      "view_all": "सभी देखें",
+      "onboarding_title": "ब्लॉग पोस्ट",
+      "onboarding_content": "अपने ग्राहकों को अपने ब्लॉग पोस्ट का सारांश दें"
+    },
+    "featured_collection": {
+      "view_all": "सभी देखें",
+      "view_all_label": "<p>संग्रह {{ collection_name }} के सभी उत्पाद देखें</p>"
+    },
+    "collection_list": {
+      "view_all": "सभी देखें"
+    },
+    "collection_template": {
+      "empty": "कोई उत्पाद नहीं मिला",
+      "title": "संग्रह",
+      "use_fewer_filters_html": "कम फ़िल्टर का उपयोग करें या <a class=\"&lt;span class='notranslate'&gt;{{ class }}&lt;/span&gt;\" href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">सभी हटाएँ</a>"
+    },
+    "video": {
+      "load_video": "वीडियो लोड करें: {{ description }}"
+    },
+    "slideshow": {
+      "load_slide": "स्लाइड लोड करें",
+      "previous_slideshow": "पिछली स्लाइड",
+      "next_slideshow": "अगली स्लाइड",
+      "pause_slideshow": "स्लाइडशो रोकें",
+      "play_slideshow": "स्लाइड शो चलाएं",
+      "carousel": "कैरोज़ल",
+      "slide": "स्लाइड"
+    },
+    "page": {
+      "title": "पृष्ठ शीर्षक"
+    },
+    "quick_order_list": {
+      "product_total": "उत्पाद उपयोग (Product subtotal)",
+      "view_cart": "कार्ट देखें",
+      "each": "{{ money }}/प्रत्येक",
+      "product": "उत्पाद",
+      "variant": "विकल्प",
+      "variant_total": "कुल प्रकार",
+      "items_added": {
+        "one": "{{ quantity }} आइटम जोड़ा गया है",
+        "other": "{{ quantity }} आइटम जोड़े गए"
+      },
+      "items_removed": {
+        "one": "{{ quantity }} आइटम हटा दिया गया",
+        "other": "{{ quantity }} आइटम हटाए गए"
+      },
+      "product_variants": "उत्पाद प्रकार",
+      "total_items": "कुल आइटम",
+      "remove_all_single_item_confirmation": "क्या आप अपने कार्ट से 1 आइटम हटाना चाहते हैं?",
+      "remove_all_items_confirmation": "क्या आप अपने कार्ट से सभी {{ quantity }} आइटम हटाना चाहते हैं?",
+      "remove_all": "सब हटाएं",
+      "cancel": "रद्द करें",
+      "min_error": "इस मद का न्यूनतम {{ min }} है",
+      "max_error": "इस आइटम की अधिकतम संख्या {{ max }} है",
+      "step_error": "आप इस आइटम को केवल {{ step }} के गुणकों में जोड़ सकते हैं।"
+    }
+  },
+  "general": {
+    "password_page": {
+      "login_form_heading": "पासवर्ड का उपयोग करके स्टोर में प्रवेश करें:",
+      "login_password_button": "पासवर्ड का उपयोग करके प्रवेश करें",
+      "login_form_password_label": "पासवर्ड",
+      "login_form_password_placeholder": "आपका पासवर्ड",
+      "login_form_error": "गलत पासवर्ड!",
+      "login_form_submit": "प्रवेश करें",
+      "admin_link_html": "क्या आप स्टोर के मालिक हैं? <a href=\"/admin\" class=\"link underlined-link\">यहाँ लॉग इन करें</a>",
+      "powered_by_shopify_html": "यह दुकान {{ shopify }} द्वारा संचालित होगी"
+    },
+    "social": {
+      "alt_text": {
+        "share_on_facebook": "फेसबुक पर शेयर करें",
+        "share_on_twitter": "X पर साझा करें",
+        "share_on_pinterest": "पिंटरेस्ट पर पिन करें"
+      },
+      "links": {
+        "twitter": "X (ट्विटर)",
+        "facebook": "फेसबुक",
+        "pinterest": "पिनट्रेस्ट",
+        "instagram": "इंस्टाग्राम",
+        "tumblr": "टम्बलर",
+        "snapchat": "स्नैपचैट",
+        "youtube": "यूट्यूब",
+        "vimeo": "विमियो",
+        "tiktok": "टिकटॉक"
+      }
+    },
+    "continue_shopping": "खरीदारी जारी रखें",
+    "pagination": {
+      "label": "पृष्ठांकन",
+      "page": "पृष्ठ {{ number }}",
+      "next": "अगला पृष्ठ",
+      "previous": "पिछला पृष्ठ"
+    }
+  }
+}
