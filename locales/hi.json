@@ -154,6 +154,142 @@
       "page": "पृष्ठ {{ number }}",
       "next": "अगला पृष्ठ",
       "previous": "पिछला पृष्ठ"
+    },
+    "search": {
+      "search": "खोजें",
+      "reset": "खोज शब्द साफ़ करें"
+    },
+    "cart": {
+      "view": "कार्ट देखें ({{ count }})",
+      "view_empty_cart": "कार्ट देखें",
+      "item_added": "आइटम आपके कार्ट में जोड़ दिया गया है"
+    },
+    "share": {
+      "close": "शेयर बंद करें",
+      "copy_to_clipboard": "लिंक कॉपी करें",
+      "share_url": "लिंक",
+      "success_message": "लिंक क्लिपबोर्ड पर कॉपी किया गया"
+    },
+    "slider": {
+      "of": "का",
+      "next_slide": "दाएं स्वाइप करें",
+      "previous_slide": "बाईं ओर स्लाइड करें",
+      "name": "स्लाइडर"
+    }
+  },
+  "newsletter": {
+    "label": "ईमेल",
+    "success": "सदस्यता लेने के लिए धन्यवाद",
+    "button_label": "सदस्यता लें"
+  },
+  "accessibility": {
+    "skip_to_text": "सामग्री पर जाएं",
+    "skip_to_product_info": "उत्पाद जानकारी पर जाएं",
+    "close": "बंद करें",
+    "unit_price_separator": "प्रति",
+    "vendor": "विक्रेता:",
+    "error": "त्रुटि",
+    "refresh_page": "किसी विकल्प का चयन करने पर पूरा पेज रिफ्रेश हो जाता है।",
+    "link_messages": {
+      "new_window": "नई विंडो में खुलता है।",
+      "external": "बाहरी वेबसाइट खोलता है।"
+    },
+    "loading": "लोड हो रहा है...",
+    "total_reviews": "कुल समीक्षाएं",
+    "star_reviews_info": "{{ rating_value }} में से {{ rating_max }} स्टार",
+    "collapsible_content_title": "समेटने योग्य सामग्री",
+    "complementary_products": "पूरक उत्पाद"
+  },
+  "blogs": {
+    "article": {
+      "blog": "ब्लॉग",
+      "read_more_title": "और पढ़ें: {{ title }}",
+      "comments": {
+        "one": "{{ count }} टिप्पणी",
+        "other": "{{ count }} टिप्पणियाँ"
+      },
+      "moderated": "कृपया ध्यान दें, टिप्पणियों को प्रकाशित करने से पहले उनकी स्वीकृति आवश्यक है।",
+      "comment_form_title": "टिप्पणी छोड़ें",
+      "name": "नाम",
+      "email": "ईमेल",
+      "message": "टिप्पणी",
+      "post": "टिप्पणी पोस्ट करें",
+      "back_to_blog": "ब्लॉग पर वापस जाएं",
+      "share": "इस लेख को साझा करें",
+      "success": "आपकी टिप्पणी सफलतापूर्वक पोस्ट हो गई है! धन्यवाद!",
+      "success_moderated": "आपकी टिप्पणी सफलतापूर्वक पोस्ट कर दी गई है। हमारा ब्लॉग मॉडरेट किया जाता है, इसलिए हम इसे थोड़ी देर में प्रकाशित करेंगे।"
+    }
+  },
+  "onboarding": {
+    "product_title": "उदाहरण उत्पाद शीर्षक",
+    "collection_title": "आपके संग्रह का नाम"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "कार्ट में डालें",
+      "choose_options": "विकल्प चुनें",
+      "choose_product_options": "{{ product_name }} के लिए विकल्प चुनें",
+      "description": "विवरण",
+      "inventory_in_stock": "स्टॉक में है",
+      "inventory_in_stock_show_count": "{{ quantity }} स्टॉक में",
+      "inventory_low_stock": "स्टॉक कम है",
+      "inventory_low_stock_show_count": "कम स्टॉक: {{ quantity }} बचा है",
+      "inventory_out_of_stock": "स्टॉक में नहीं है",
+      "inventory_out_of_stock_continue_selling": "स्टॉक में है",
+      "sku": "एसकेयू",
+      "on_sale": "सेल",
+      "product_variants": "उत्पाद प्रकार",
+      "media": {
+        "gallery_viewer": "गैलरी व्यूअर",
+        "load_image": "गैलरी दृश्य में चित्र {{ index }} लोड करें",
+        "load_model": "गैलरी दृश्य में 3D मॉडल {{ index }} लोड करें",
+        "load_video": "वीडियो चलाएं {{ index }} गैलरी व्यू में",
+        "image_available": "छवि {{ index }} अब गैलरी दृश्य में उपलब्ध है",
+        "open_media": "मोडल में मीडिया {{ index }} खोलें",
+        "play_model": "3D व्यूअर चलाएं",
+        "play_video": "वीडियो चलाएं"
+      },
+      "quantity": {
+        "label": "मात्रा",
+        "input_label": "{{ product }} के लिए मात्रा",
+        "increase": "{{ product }} की मात्रा बढ़ाएँ",
+        "decrease": "<p>\n    {{ product }} के लिए मात्रा घटाएँ\n</p>",
+        "minimum_of": "न्यूनतम {{ quantity }}",
+        "maximum_of": "अधिकतम {{ quantity }}",
+        "multiples_of": "{{ quantity }} की वेतन वृद्धि",
+        "min_of": "न्यूनतम {{ quantity }}",
+        "max_of": "अधिकतम {{ quantity }}",
+        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> कार्ट में",
+        "in_cart_aria_label": "मात्रा (कार्ट में {{ quantity }})",
+        "note": "मात्रा नियम देखें"
+      },
+      "volume_pricing": {
+        "title": "वॉल्यूम प्राइसिंग",
+        "note": "थोक मूल्य निर्धारण उपलब्ध है",
+        "minimum": "{{ quantity }}+",
+        "price_at_each_html": "{{ price }}/प्रत्येक पर"
+      },
+      "pickup_availability": {
+        "view_store_info": "स्टोर की जानकारी देखें",
+        "check_other_stores": "अन्य स्टोर पर उपलब्धता की जांच करें",
+        "pick_up_available": "पिकअप उपलब्ध है",
+        "pick_up_available_at_html": "पिकअप यहां उपलब्ध है: <span class=\"color-foreground\">{{ location_name }}</span>",
+        "pick_up_unavailable_at_html": "पिकअप वर्तमान में <span class=\"color-foreground\">{{ location_name }}</span> पर उपलब्ध नहीं है",
+        "unavailable": "पिकअप उपलब्धता लोड नहीं हो सकी",
+        "refresh": "रीफ्रेश करें"
+      },
+      "price": {
+        "from_price_html": "से {{ price }}",
+        "regular_price": "सामान्य मूल्य",
+        "sale_price": "बिक्री मूल्य",
+        "unit_price": "इकाई मूल्य"
+      },
+      "share": "इस उत्पाद को साझा करें",
+      "sold_out": "बिक गया",
+      "unavailable": "अनुपलब्ध",
+      "vendor": "विक्रेता",
+      "value_unavailable": "{{ option_value }} - अनुपलब्ध",
+      "variant_sold_out_or_unavailable": "वेरिएंट बिक चुका है या उपलब्ध नहीं है"
     }
   }
 }
